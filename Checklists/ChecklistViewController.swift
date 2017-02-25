@@ -12,6 +12,21 @@ class ChecklistViewController: UITableViewController {
     
     var items: [ChecklistItem]; //对象数组
     
+    @IBAction func addItem() {
+        let newRowIndex = items.count;
+        
+        let item = ChecklistItem();
+        item.text = "我的新的行";
+        item.checked = false;
+        items.append(item);
+        
+        let indexPath = NSIndexPath(row: newRowIndex, section: 0);
+        let indexPaths = [indexPath];
+        
+        tableView.insertRows(at: indexPaths as [IndexPath], with: .automatic)
+    }
+    
+    
     required init?(coder aDecoder: NSCoder) {
         items = [ChecklistItem](); //对象数组初始化
         
@@ -54,6 +69,15 @@ class ChecklistViewController: UITableViewController {
     
         return cell;
         
+    }
+    
+    // 删除某行
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        items.remove(at: indexPath.row);
+        
+        let indexPaths = [indexPath];
+        
+        tableView.deleteRows(at: indexPaths, with: .automatic);
     }
     
     
