@@ -16,6 +16,10 @@ class ChecklistViewController: UITableViewController {
         items = [ChecklistItem](); //对象数组初始化
         
         super.init(coder: aDecoder);
+        
+        print("dataFilePath: \(documentDirectory())");
+        
+        loadChecklistItems();
     }
     
     
@@ -47,6 +51,8 @@ class ChecklistViewController: UITableViewController {
         let indexPaths = [indexPath];
         
         tableView.deleteRows(at: indexPaths, with: .automatic);
+        
+        saveChecklistItems();
     }
     
     
@@ -61,7 +67,10 @@ class ChecklistViewController: UITableViewController {
             
         }
         
+        saveChecklistItems()
+        
         tableView.deselectRow(at: indexPath, animated: true);
+        
     }
     
     // 自定义配置Checkmark
@@ -105,6 +114,51 @@ class ChecklistViewController: UITableViewController {
             
         }
     }
+    
+    
+    // 沙盒目录
+    func documentDirectory() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        //["/Users/xudong7930/Library/Developer/CoreSimulator/Devices/56E11DCF-07C7-48C6-8E09-DAB71AF9C554/data/Containers/Data/Application/BC5C0EDD-B732-483A-8D8A-048B4677E5FC/Documents"]
+        return paths[0];
+    }
+    
+    // 文件路径
+    func dataFilePath() -> String {
+        return "\(documentDirectory())/Checklists.plist";
+    }
+    
+    // 保存items到文件里面
+    func saveChecklistItems() {
+        //构建可修改的数据
+        let data = NSMutableData();
+        
+        //将数据编码加密
+        let archiver = NSKeyedArchiver(forWritingWith: data);
+        archiver.encode(items, forKey: "ChecklistItems");
+        archiver.finishEncoding();
+        
+        //写入磁盘文件
+        data.write(toFile: dataFilePath(), atomically: true);
+    }
+    
+    
+    // 从文件中读取items
+    func loadChecklistItems() {
+        let file = dataFilePath();
+        
+        // 判断文件是否存在
+        if FileManager.default.fileExists(atPath: file) {
+            
+            // 文件存在则读取文件内容
+            if let data = NSData(contentsOfFile: file) {
+                
+                let unarchiver = NSKeyedUnarchiver(forReadingWith: data as Data);
+                items = unarchiver.decodeObject(forKey: "ChecklistItems") as! [ChecklistItem]
+                unarchiver.finishDecoding();
+            }
+        }
+    }
 }
 
 
@@ -128,7 +182,7 @@ extension ChecklistViewController: ItemDetailViewControllerDelegate {
         let indexPaths = [indexPath];
         tableView.insertRows(at: indexPaths as [IndexPath], with: .automatic);
     
-        
+        saveChecklistItems();
         
         dismiss(animated: true, completion: nil);
     }
@@ -138,15 +192,19 @@ extension ChecklistViewController: ItemDetailViewControllerDelegate {
     func didDone(controller: ItemDetailViewController, finishEditItem item: ChecklistItem) {
 
         if let index = items.index(where: {$0 === item}) {
-            print(22222);
+
             let indexPath = NSIndexPath(row: index, section: 0);
             
             if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
                 configureTextForCell(cell, withChecklistItem: item);
             }
         }
-
+        
+        saveChecklistItems();
+        
         dismiss(animated: true, completion: nil);
     }
+    
+    
     
 }
