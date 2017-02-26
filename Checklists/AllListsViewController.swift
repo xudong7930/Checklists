@@ -12,6 +12,24 @@ class AllListViewController: UITableViewController {
     
     var dataModel: DataModel!;
     
+    // 视图确实出现
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated);
+        
+        navigationController?.delegate = self;
+        
+        // 如果存在先前的，则跳转到先前的视图
+        //let index = UserDefaults.standard.integer(forKey: "ChecklistIndex");
+        let index = dataModel.indexOfSelectedChecklist;
+       
+        if index > -1 && index < dataModel.lists.count {
+            let list = dataModel.lists[index];
+            performSegue(withIdentifier: "ShowChecklist", sender: list);
+        }
+        
+        
+    }
+    
     // 有多少行
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataModel.lists.count;
@@ -31,6 +49,11 @@ class AllListViewController: UITableViewController {
     
     // 选中cell后的操作
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // 设置默认值
+        //UserDefaults.standard.set(indexPath.row, forKey: "ChecklistIndex");
+        dataModel.indexOfSelectedChecklist = indexPath.row;
+        
         
         let list = dataModel.lists[indexPath.row];
         
@@ -131,6 +154,19 @@ extension AllListViewController: ListViewControllerDelegate {
         
         dismiss(animated: true, completion: nil);
     }
+    
+}
+
+
+extension AllListViewController: UINavigationControllerDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if viewController === self {
+            //UserDefaults.standard.set(-1, forKey: "ChecklistIndex");
+            dataModel.indexOfSelectedChecklist = -1;
+        }
+    }
+    
     
 }
 

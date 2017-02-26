@@ -12,9 +12,48 @@ class DataModel {
     
     var lists = [Checklist]();
     
-    init() {
+    let saveKey = "ChecklistIndex";
     
-        loadChecklist();
+    var indexOfSelectedChecklist: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: saveKey);
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: saveKey)
+            UserDefaults.standard.synchronize(); //同步
+        }
+    }
+    
+    init() {
+        loadChecklist(); //加载文件
+        registerDefaults(); //注册默认
+        handleFirstTime(); //处理的第一次
+    }
+    
+    
+    // 注册默认值
+    func registerDefaults() {
+        let dic: [String: Any] = [saveKey: -1, "firstTime": true];
+        
+        
+        
+        UserDefaults.standard.register(defaults: dic);
+    }
+    
+    func handleFirstTime() {
+
+        let firstTime = UserDefaults.standard.bool(forKey: "firstTime")
+        if  firstTime {
+            let list = Checklist(name: "List");
+            lists.append(list);
+            
+            indexOfSelectedChecklist = 0;
+            
+            UserDefaults.standard.set(false, forKey: "firstTime");
+            UserDefaults.standard.synchronize();
+            
+        }
         
     }
     
@@ -37,7 +76,7 @@ class DataModel {
         
         //将数据编码加密
         let archiver = NSKeyedArchiver(forWritingWith: data);
-        archiver.encode(lists, forKey: "Checklists");
+        archiver.encode(lists, forKey: saveKey);
         archiver.finishEncoding();
         
         //写入磁盘文件
@@ -56,7 +95,7 @@ class DataModel {
             if let data = NSData(contentsOfFile: file) {
                 
                 let unarchiver = NSKeyedUnarchiver(forReadingWith: data as Data);
-                lists = unarchiver.decodeObject(forKey: "Checklists") as! [Checklist]
+                lists = unarchiver.decodeObject(forKey: saveKey) as! [Checklist]
                 unarchiver.finishDecoding();
             }
         }
