@@ -12,39 +12,8 @@ class ChecklistViewController: UITableViewController {
     
     var items: [ChecklistItem]; //对象数组
     
-    @IBAction func addItem() {
-        let newRowIndex = items.count;
-        
-        let item = ChecklistItem();
-        item.text = "我的新的行";
-        item.checked = false;
-        items.append(item);
-        
-        let indexPath = NSIndexPath(row: newRowIndex, section: 0);
-        let indexPaths = [indexPath];
-        
-        tableView.insertRows(at: indexPaths as [IndexPath], with: .automatic)
-    }
-    
-    
     required init?(coder aDecoder: NSCoder) {
         items = [ChecklistItem](); //对象数组初始化
-        
-        //往数组里面添加值
-        let rowitem = ChecklistItem();
-        rowitem.text = "遛狗";
-        rowitem.checked = false;
-        items.append(rowitem);
-        
-        let row1item = ChecklistItem();
-        row1item.text = "遛狗1";
-        row1item.checked = false;
-        items.append(row1item);
-        
-        let row2item = ChecklistItem();
-        row2item.text = "遛狗2";
-        row2item.checked = false;
-        items.append(row2item);
         
         super.init(coder: aDecoder);
     }
@@ -113,6 +82,45 @@ class ChecklistViewController: UITableViewController {
     }
     
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // 找到指定的segue
+        if segue.identifier == "AddItem" {
+            // 找到AddItemViewController
+            let nav = segue.destination as! UINavigationController;
+            let controller = nav.topViewController as! AddItemViewController;
+            
+            //找到delegate并赋值
+            controller.delegate = self;
+        }
+    }
 }
 
+
+// 成为AddItemViewController的代理
+extension ChecklistViewController: AddItemViewControllerDelegate {
+    
+    // 取消
+    func didCancel(controller: AddItemViewController) {
+        dismiss(animated: true, completion: nil);
+    }
+    
+    // 完成
+    func didDone(controller: AddItemViewController, finishAddItem item: ChecklistItem) {
+        
+        
+        let newIndex = items.count;
+        
+        items.append(item);
+        
+        let indexPath = NSIndexPath(row: newIndex, section: 0);
+        let indexPaths = [indexPath];
+        tableView.insertRows(at: indexPaths as [IndexPath], with: .automatic);
+    
+        
+        
+        dismiss(animated: true, completion: nil);
+    }
+    
+    
+    
+}
