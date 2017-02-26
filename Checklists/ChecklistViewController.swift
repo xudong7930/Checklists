@@ -11,17 +11,24 @@ import UIKit
 class ChecklistViewController: UITableViewController {
     
     var items: [ChecklistItem]; //对象数组
+    var checklist: Checklist!;
     
     required init?(coder aDecoder: NSCoder) {
         items = [ChecklistItem](); //对象数组初始化
         
         super.init(coder: aDecoder);
         
-        print("dataFilePath: \(documentDirectory())");
+        //print("dataFilePath: \(documentDirectory())");
         
         loadChecklistItems();
     }
     
+    // 视图已经加载
+    override func viewDidLoad() {
+        super.viewDidLoad();
+        
+        title = checklist.name;
+    }
     
     // 表格有多少行
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
