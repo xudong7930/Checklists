@@ -67,11 +67,9 @@ class ChecklistViewController: UITableViewController {
     // 自定义配置Checkmark
     func configureCheckmarkForCell(_ cell: UITableViewCell, withChecklistItem item: ChecklistItem) {
         
-        if item.checked {
-            cell.accessoryType = .checkmark;
-        } else {
-            cell.accessoryType = .none;
-        }
+        let label_1002 = cell.viewWithTag(1002) as! UILabel;
+        
+        label_1002.text = (item.checked) ? "√" : "";
     }
     
     
@@ -85,27 +83,41 @@ class ChecklistViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 找到指定的segue
         if segue.identifier == "AddItem" {
-            // 找到AddItemViewController
+            // 找到ItemDetailViewController
             let nav = segue.destination as! UINavigationController;
-            let controller = nav.topViewController as! AddItemViewController;
+            let controller = nav.topViewController as! ItemDetailViewController;
             
             //找到delegate并赋值
             controller.delegate = self;
+        }
+        
+        
+        if segue.identifier == "EditItem" {
+            let nav = segue.destination as! UINavigationController;
+            let controller = nav.topViewController as! ItemDetailViewController;
+            
+            controller.delegate = self;
+            
+            // 找到点击了哪个Cell
+            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+                controller.itemToEdit = items[indexPath.row];
+            }
+            
         }
     }
 }
 
 
-// 成为AddItemViewController的代理
-extension ChecklistViewController: AddItemViewControllerDelegate {
+// 成为ItemDetailViewController的代理
+extension ChecklistViewController: ItemDetailViewControllerDelegate {
     
     // 取消
-    func didCancel(controller: AddItemViewController) {
+    func didCancel(controller: ItemDetailViewController) {
         dismiss(animated: true, completion: nil);
     }
     
-    // 完成
-    func didDone(controller: AddItemViewController, finishAddItem item: ChecklistItem) {
+    // 添加
+    func didDone(controller: ItemDetailViewController, finishAddItem item: ChecklistItem) {
         
         
         let newIndex = items.count;
@@ -122,5 +134,19 @@ extension ChecklistViewController: AddItemViewControllerDelegate {
     }
     
     
+    // 编辑
+    func didDone(controller: ItemDetailViewController, finishEditItem item: ChecklistItem) {
+
+        if let index = items.index(where: {$0 === item}) {
+            print(22222);
+            let indexPath = NSIndexPath(row: index, section: 0);
+            
+            if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
+                configureTextForCell(cell, withChecklistItem: item);
+            }
+        }
+
+        dismiss(animated: true, completion: nil);
+    }
     
 }

@@ -13,19 +13,19 @@
 		EB38A9B01E61C025009A0BF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB38A9AF1E61C025009A0BF5 /* Assets.xcassets */; };
 		EB38A9B31E61C025009A0BF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB38A9B11E61C025009A0BF5 /* LaunchScreen.storyboard */; };
 		EB38A9BB1E61D021009A0BF5 /* ChecklistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB38A9BA1E61D021009A0BF5 /* ChecklistItem.swift */; };
-		EB38A9BD1E61E868009A0BF5 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB38A9BC1E61E868009A0BF5 /* AddItemViewController.swift */; };
+		EB38A9BD1E61E868009A0BF5 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB38A9BC1E61E868009A0BF5 /* ItemDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EB38A9A51E61C025009A0BF5 /* Checklists.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checklists.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB38A9A81E61C025009A0BF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EB38A9AA1E61C025009A0BF5 /* ChecklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistViewController.swift; sourceTree = "<group>"; };
+		EB38A9AA1E61C025009A0BF5 /* ChecklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChecklistViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		EB38A9AD1E61C025009A0BF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB38A9AF1E61C025009A0BF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB38A9B21E61C025009A0BF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB38A9B41E61C025009A0BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB38A9BA1E61D021009A0BF5 /* ChecklistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChecklistItem.swift; sourceTree = "<group>"; };
-		EB38A9BC1E61E868009A0BF5 /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		EB38A9BC1E61E868009A0BF5 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ItemDetailViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +65,7 @@
 				EB38A9B11E61C025009A0BF5 /* LaunchScreen.storyboard */,
 				EB38A9B41E61C025009A0BF5 /* Info.plist */,
 				EB38A9BA1E61D021009A0BF5 /* ChecklistItem.swift */,
-				EB38A9BC1E61E868009A0BF5 /* AddItemViewController.swift */,
+				EB38A9BC1E61E868009A0BF5 /* ItemDetailViewController.swift */,
 			);
 			path = Checklists;
 			sourceTree = "<group>";
@@ -144,7 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB38A9AB1E61C025009A0BF5 /* ChecklistViewController.swift in Sources */,
-				EB38A9BD1E61E868009A0BF5 /* AddItemViewController.swift in Sources */,
+				EB38A9BD1E61E868009A0BF5 /* ItemDetailViewController.swift in Sources */,
 				EB38A9BB1E61D021009A0BF5 /* ChecklistItem.swift in Sources */,
 				EB38A9A91E61C025009A0BF5 /* AppDelegate.swift in Sources */,
 			);
@@ -308,6 +308,7 @@
 				EB38A9B91E61C025009A0BF5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
