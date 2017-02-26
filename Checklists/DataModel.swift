@@ -32,6 +32,15 @@ class DataModel {
     }
     
     
+    // 排序
+    func sortCheckLists() {
+        lists.sort(by: {
+            (list1, list2) in
+            return list1.name.localizedCompare(list2.name) == .orderedAscending;
+        })
+    }
+    
+    
     // 注册默认值
     func registerDefaults() {
         let dic: [String: Any] = [saveKey: -1, "firstTime": true];
@@ -97,6 +106,8 @@ class DataModel {
                 let unarchiver = NSKeyedUnarchiver(forReadingWith: data as Data);
                 lists = unarchiver.decodeObject(forKey: saveKey) as! [Checklist]
                 unarchiver.finishDecoding();
+                
+                sortCheckLists();
             }
         }
     }

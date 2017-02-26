@@ -30,6 +30,13 @@ class AllListViewController: UITableViewController {
         
     }
     
+    // 视图将会出现
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+        tableView.reloadData();
+    }
+    
+    
     // 有多少行
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataModel.lists.count;
@@ -43,6 +50,22 @@ class AllListViewController: UITableViewController {
         let list = dataModel.lists[indexPath.row];
         cell.textLabel!.text = list.name;
         cell.accessoryType = .detailDisclosureButton;
+        
+        // 子标题
+        let count = list.countUncheckedItems();
+        var subTitle = "";
+        if list.items.count == 0 {
+            subTitle = "没有项目";
+        } else if count < 1 {
+            subTitle = "全部完成";
+        } else {
+            subTitle = "剩余\(count)项"
+        }
+        
+        cell.detailTextLabel?.text = subTitle;
+        
+        // 图标
+        cell.imageView!.image = UIImage(named: list.iconName);
         
         return cell;
     }
@@ -111,7 +134,7 @@ class AllListViewController: UITableViewController {
             return cell;
         }
         
-        return UITableViewCell(style: .default, reuseIdentifier: cellIdentifier);
+        return UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier);
     
     }
 }
@@ -127,15 +150,19 @@ extension AllListViewController: ListViewControllerDelegate {
     
     // 添加
     func didDone(controller: ListDetailViewController, finishAdd list: Checklist) {
-        let newIndex = dataModel.lists.count;
+        
         
         dataModel.lists.append(list);
+        dataModel.sortCheckLists();
+        tableView.reloadData();
         
+        /*
+        let newIndex = dataModel.lists.count;
         let indexPath = NSIndexPath(row: newIndex, section: 0);
         let indexPaths = [indexPath];
         
         tableView.insertRows(at: indexPaths as [IndexPath], with: .automatic);
-        
+        */
         
         dismiss(animated: true, completion: nil);
     }
@@ -143,6 +170,10 @@ extension AllListViewController: ListViewControllerDelegate {
     // 编辑
     func didDone(controller: ListDetailViewController, finishEdit list: Checklist) {
         
+        dataModel.sortCheckLists();
+        tableView.reloadData();
+        
+        /*
         if let index = dataModel.lists.index(where: {return $0 == list}) {
             let indexPath = NSIndexPath(row: index, section: 0);
             
@@ -151,6 +182,7 @@ extension AllListViewController: ListViewControllerDelegate {
             }
             
         }
+        */
         
         dismiss(animated: true, completion: nil);
     }

@@ -23,12 +23,15 @@ protocol ListViewControllerDelegate: class {
 class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     
     var listToEdit: Checklist?;
+    var choosedIcon = "Folder";
     
     // 代理
     weak var delegate: ListViewControllerDelegate?;
     
     @IBOutlet weak var listName: UITextField!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!;
+    @IBOutlet weak var iconImage: UIImageView!;
+    
     
     @IBAction func cancel() {
         delegate?.didCancel(controller: self);
@@ -38,12 +41,17 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
         
         if let list = listToEdit { //编辑
             list.name = listName.text!;
+            list.iconName = choosedIcon;
             delegate?.didDone(controller: self, finishEdit: list);
         
         } else { //添加
+            /*
             let list = Checklist();
             list.name = listName.text!;
-        
+            list.iconName = choosedIcon;
+            */
+            
+            let list = Checklist(name: listName.text!, iconName: choosedIcon);
             delegate?.didDone(controller: self, finishAdd: list);
         }
     }
@@ -55,7 +63,10 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
             title = "编辑List";
             listName.text = list.name;
             doneBarButton.isEnabled = true;
+            choosedIcon = list.iconName;
         }
+        
+        iconImage.image = UIImage(named: choosedIcon);
     }
     
     
@@ -85,12 +96,35 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        
+        if indexPath.section == 1 {
+            return indexPath;
+        }
+        
         return nil;
     }
     
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "pickIcon" {
+            let controller = segue.destination as! IconPickerViewController;
+            controller.delegate = self;
+        }
+    }
     
     
+}
+
+extension ListDetailViewController: IconPickerViewControllerDelegate {
+    func iconPicker(picker: IconPickerViewController, didPickIcon iconName: String) {
+        
+        self.choosedIcon = iconName;
+        iconImage.image = UIImage(named: self.choosedIcon);
+        
+        navigationController?.popViewController(animated: true);
     
+        
+        
+    }
 }

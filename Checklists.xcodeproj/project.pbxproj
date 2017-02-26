@@ -11,13 +11,13 @@
 		EB38A9AB1E61C025009A0BF5 /* ChecklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB38A9AA1E61C025009A0BF5 /* ChecklistViewController.swift */; };
 		EB38A9AE1E61C025009A0BF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB38A9AC1E61C025009A0BF5 /* Main.storyboard */; };
 		EB38A9B01E61C025009A0BF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB38A9AF1E61C025009A0BF5 /* Assets.xcassets */; };
-		EB38A9B31E61C025009A0BF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB38A9B11E61C025009A0BF5 /* LaunchScreen.storyboard */; };
 		EB38A9BB1E61D021009A0BF5 /* ChecklistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB38A9BA1E61D021009A0BF5 /* ChecklistItem.swift */; };
 		EB38A9BD1E61E868009A0BF5 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB38A9BC1E61E868009A0BF5 /* ItemDetailViewController.swift */; };
 		EBAD9B3A1E6299EF001E7A3D /* AllListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAD9B391E6299EF001E7A3D /* AllListsViewController.swift */; };
 		EBAD9B3C1E62A1AC001E7A3D /* Checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAD9B3B1E62A1AC001E7A3D /* Checklist.swift */; };
 		EBAD9B3E1E62A6BE001E7A3D /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAD9B3D1E62A6BE001E7A3D /* ListDetailViewController.swift */; };
 		EBAD9B401E62D0DA001E7A3D /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAD9B3F1E62D0DA001E7A3D /* DataModel.swift */; };
+		EBC31AE41E6303CF002A7712 /* IconPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC31AE31E6303CF002A7712 /* IconPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +26,6 @@
 		EB38A9AA1E61C025009A0BF5 /* ChecklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChecklistViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		EB38A9AD1E61C025009A0BF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB38A9AF1E61C025009A0BF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EB38A9B21E61C025009A0BF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB38A9B41E61C025009A0BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB38A9BA1E61D021009A0BF5 /* ChecklistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChecklistItem.swift; sourceTree = "<group>"; };
 		EB38A9BC1E61E868009A0BF5 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ItemDetailViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -34,6 +33,7 @@
 		EBAD9B3B1E62A1AC001E7A3D /* Checklist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checklist.swift; sourceTree = "<group>"; };
 		EBAD9B3D1E62A6BE001E7A3D /* ListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
 		EBAD9B3F1E62D0DA001E7A3D /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		EBC31AE31E6303CF002A7712 /* IconPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +70,6 @@
 				EB38A9AA1E61C025009A0BF5 /* ChecklistViewController.swift */,
 				EB38A9AC1E61C025009A0BF5 /* Main.storyboard */,
 				EB38A9AF1E61C025009A0BF5 /* Assets.xcassets */,
-				EB38A9B11E61C025009A0BF5 /* LaunchScreen.storyboard */,
 				EB38A9B41E61C025009A0BF5 /* Info.plist */,
 				EB38A9BA1E61D021009A0BF5 /* ChecklistItem.swift */,
 				EB38A9BC1E61E868009A0BF5 /* ItemDetailViewController.swift */,
@@ -78,6 +77,7 @@
 				EBAD9B3B1E62A1AC001E7A3D /* Checklist.swift */,
 				EBAD9B3D1E62A6BE001E7A3D /* ListDetailViewController.swift */,
 				EBAD9B3F1E62D0DA001E7A3D /* DataModel.swift */,
+				EBC31AE31E6303CF002A7712 /* IconPickerViewController.swift */,
 			);
 			path = Checklists;
 			sourceTree = "<group>";
@@ -142,7 +142,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB38A9B31E61C025009A0BF5 /* LaunchScreen.storyboard in Resources */,
 				EB38A9B01E61C025009A0BF5 /* Assets.xcassets in Resources */,
 				EB38A9AE1E61C025009A0BF5 /* Main.storyboard in Resources */,
 			);
@@ -158,6 +157,7 @@
 				EB38A9AB1E61C025009A0BF5 /* ChecklistViewController.swift in Sources */,
 				EBAD9B3E1E62A6BE001E7A3D /* ListDetailViewController.swift in Sources */,
 				EB38A9BD1E61E868009A0BF5 /* ItemDetailViewController.swift in Sources */,
+				EBC31AE41E6303CF002A7712 /* IconPickerViewController.swift in Sources */,
 				EBAD9B3C1E62A1AC001E7A3D /* Checklist.swift in Sources */,
 				EB38A9BB1E61D021009A0BF5 /* ChecklistItem.swift in Sources */,
 				EBAD9B401E62D0DA001E7A3D /* DataModel.swift in Sources */,
@@ -175,14 +175,6 @@
 				EB38A9AD1E61C025009A0BF5 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		EB38A9B11E61C025009A0BF5 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EB38A9B21E61C025009A0BF5 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

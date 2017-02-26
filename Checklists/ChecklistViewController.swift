@@ -80,8 +80,9 @@ class ChecklistViewController: UITableViewController {
     func configureCheckmarkForCell(_ cell: UITableViewCell, withChecklistItem item: ChecklistItem) {
         
         let label_1002 = cell.viewWithTag(1002) as! UILabel;
+        label_1002.tintColor = view.tintColor; //设置全局颜色
         
-        label_1002.text = (item.checked) ? "√" : "";
+        label_1002.text = (item.checked) ? "✔️" : "";
     }
     
     
