@@ -17,6 +17,7 @@
 		EBAD9B3A1E6299EF001E7A3D /* AllListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAD9B391E6299EF001E7A3D /* AllListsViewController.swift */; };
 		EBAD9B3C1E62A1AC001E7A3D /* Checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAD9B3B1E62A1AC001E7A3D /* Checklist.swift */; };
 		EBAD9B3E1E62A6BE001E7A3D /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAD9B3D1E62A6BE001E7A3D /* ListDetailViewController.swift */; };
+		EBAD9B401E62D0DA001E7A3D /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAD9B3F1E62D0DA001E7A3D /* DataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		EBAD9B391E6299EF001E7A3D /* AllListsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllListsViewController.swift; sourceTree = "<group>"; };
 		EBAD9B3B1E62A1AC001E7A3D /* Checklist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checklist.swift; sourceTree = "<group>"; };
 		EBAD9B3D1E62A6BE001E7A3D /* ListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
+		EBAD9B3F1E62D0DA001E7A3D /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				EBAD9B391E6299EF001E7A3D /* AllListsViewController.swift */,
 				EBAD9B3B1E62A1AC001E7A3D /* Checklist.swift */,
 				EBAD9B3D1E62A6BE001E7A3D /* ListDetailViewController.swift */,
+				EBAD9B3F1E62D0DA001E7A3D /* DataModel.swift */,
 			);
 			path = Checklists;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				EB38A9BD1E61E868009A0BF5 /* ItemDetailViewController.swift in Sources */,
 				EBAD9B3C1E62A1AC001E7A3D /* Checklist.swift in Sources */,
 				EB38A9BB1E61D021009A0BF5 /* ChecklistItem.swift in Sources */,
+				EBAD9B401E62D0DA001E7A3D /* DataModel.swift in Sources */,
 				EBAD9B3A1E6299EF001E7A3D /* AllListsViewController.swift in Sources */,
 				EB38A9A91E61C025009A0BF5 /* AppDelegate.swift in Sources */,
 			);

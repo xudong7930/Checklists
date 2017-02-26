@@ -10,30 +10,11 @@ import UIKit
 
 class AllListViewController: UITableViewController {
     
-    var lists: [Checklist];
-    
-    required init?(coder aDecoder: NSCoder) {
-    
-        // 初始化
-        lists = [Checklist]();
-        
-        super.init(coder: aDecoder);
-        
-        // 新建项目
-        let list = Checklist();
-        list.name = "Work";
-        
-        let list2 = Checklist(name: "House");
-        
-        // 放到数组里面
-        lists.append(list);
-        lists.append(list2);
-        
-    }
+    var dataModel: DataModel!;
     
     // 有多少行
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lists.count;
+        return dataModel.lists.count;
     }
     
     // 配置cell怎么显示
@@ -41,7 +22,7 @@ class AllListViewController: UITableViewController {
         
         let cell = cellForTableView(tableView);
         
-        let list = lists[indexPath.row];
+        let list = dataModel.lists[indexPath.row];
         cell.textLabel!.text = list.name;
         cell.accessoryType = .detailDisclosureButton;
         
@@ -51,7 +32,7 @@ class AllListViewController: UITableViewController {
     // 选中cell后的操作
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let list = lists[indexPath.row];
+        let list = dataModel.lists[indexPath.row];
         
         // 向segue="ShowChecklist"的桥传递数据list
         performSegue(withIdentifier: "ShowChecklist", sender: list);
@@ -61,7 +42,7 @@ class AllListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         // 从数组中移除
-        lists.remove(at: indexPath.row);
+        dataModel.lists.remove(at: indexPath.row);
         
         let indexPaths = [indexPath];
         
@@ -75,7 +56,7 @@ class AllListViewController: UITableViewController {
         
         controller.delegate = self;
         
-        let list = lists[indexPath.row];
+        let list = dataModel.lists[indexPath.row];
         controller.listToEdit = list;
         
         // 显示controller页面
@@ -88,7 +69,7 @@ class AllListViewController: UITableViewController {
         // 如果segue是“ShowChecklist”， 则赋值
         if segue.identifier == "ShowChecklist" {
             let controller = segue.destination as! ChecklistViewController;
-            controller.checklist = sender as! Checklist;
+            controller.list = sender as! Checklist;
         }
         
         if segue.identifier == "AddChecklist" {
@@ -123,9 +104,9 @@ extension AllListViewController: ListViewControllerDelegate {
     
     // 添加
     func didDone(controller: ListDetailViewController, finishAdd list: Checklist) {
-        let newIndex = lists.count;
+        let newIndex = dataModel.lists.count;
         
-        lists.append(list);
+        dataModel.lists.append(list);
         
         let indexPath = NSIndexPath(row: newIndex, section: 0);
         let indexPaths = [indexPath];
@@ -139,7 +120,7 @@ extension AllListViewController: ListViewControllerDelegate {
     // 编辑
     func didDone(controller: ListDetailViewController, finishEdit list: Checklist) {
         
-        if let index = lists.index(where: {return $0 == list}) {
+        if let index = dataModel.lists.index(where: {return $0 == list}) {
             let indexPath = NSIndexPath(row: index, section: 0);
             
             if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
@@ -152,6 +133,5 @@ extension AllListViewController: ListViewControllerDelegate {
     }
     
 }
-
 
 

@@ -10,29 +10,27 @@ import UIKit
 
 class ChecklistViewController: UITableViewController {
     
-    var items: [ChecklistItem]; //对象数组
-    var checklist: Checklist!;
+    // 数据对象
+    var list: Checklist!;
     
     required init?(coder aDecoder: NSCoder) {
-        items = [ChecklistItem](); //对象数组初始化
         
         super.init(coder: aDecoder);
         
         //print("dataFilePath: \(documentDirectory())");
         
-        loadChecklistItems();
     }
     
     // 视图已经加载
     override func viewDidLoad() {
         super.viewDidLoad();
         
-        title = checklist.name;
+        title = list.name;
     }
     
     // 表格有多少行
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count;
+        return list.items.count;
     }
     
     // 表格的行如何显示
@@ -41,7 +39,7 @@ class ChecklistViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChecklistItem", for: indexPath);
         
         // indexPath.row当前行数
-        let item = items[indexPath.row];
+        let item = list.items[indexPath.row];
  
         
         configureTextForCell(cell, withChecklistItem: item)
@@ -53,13 +51,12 @@ class ChecklistViewController: UITableViewController {
     
     // 删除某行
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        items.remove(at: indexPath.row);
+        list.items.remove(at: indexPath.row);
         
         let indexPaths = [indexPath];
         
         tableView.deleteRows(at: indexPaths, with: .automatic);
-        
-        saveChecklistItems();
+    
     }
     
     
@@ -67,14 +64,13 @@ class ChecklistViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let cell = tableView.cellForRow(at: indexPath) {
-            let item = items[indexPath.row];
+            let item = list.items[indexPath.row];
             item.toggleChecked();
             
             configureCheckmarkForCell(cell, withChecklistItem: item);
             
         }
         
-        saveChecklistItems()
         
         tableView.deselectRow(at: indexPath, animated: true);
         
@@ -116,56 +112,12 @@ class ChecklistViewController: UITableViewController {
             
             // 找到点击了哪个Cell
             if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
-                controller.itemToEdit = items[indexPath.row];
+                controller.itemToEdit = list.items[indexPath.row];
             }
             
         }
     }
     
-    
-    // 沙盒目录
-    func documentDirectory() -> String {
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        //["/Users/xudong7930/Library/Developer/CoreSimulator/Devices/56E11DCF-07C7-48C6-8E09-DAB71AF9C554/data/Containers/Data/Application/BC5C0EDD-B732-483A-8D8A-048B4677E5FC/Documents"]
-        return paths[0];
-    }
-    
-    // 文件路径
-    func dataFilePath() -> String {
-        return "\(documentDirectory())/Checklists.plist";
-    }
-    
-    // 保存items到文件里面
-    func saveChecklistItems() {
-        //构建可修改的数据
-        let data = NSMutableData();
-        
-        //将数据编码加密
-        let archiver = NSKeyedArchiver(forWritingWith: data);
-        archiver.encode(items, forKey: "ChecklistItems");
-        archiver.finishEncoding();
-        
-        //写入磁盘文件
-        data.write(toFile: dataFilePath(), atomically: true);
-    }
-    
-    
-    // 从文件中读取items
-    func loadChecklistItems() {
-        let file = dataFilePath();
-        
-        // 判断文件是否存在
-        if FileManager.default.fileExists(atPath: file) {
-            
-            // 文件存在则读取文件内容
-            if let data = NSData(contentsOfFile: file) {
-                
-                let unarchiver = NSKeyedUnarchiver(forReadingWith: data as Data);
-                items = unarchiver.decodeObject(forKey: "ChecklistItems") as! [ChecklistItem]
-                unarchiver.finishDecoding();
-            }
-        }
-    }
 }
 
 
@@ -181,15 +133,14 @@ extension ChecklistViewController: ItemDetailViewControllerDelegate {
     func didDone(controller: ItemDetailViewController, finishAddItem item: ChecklistItem) {
         
         
-        let newIndex = items.count;
+        let newIndex = list.items.count;
         
-        items.append(item);
+        list.items.append(item);
         
         let indexPath = NSIndexPath(row: newIndex, section: 0);
         let indexPaths = [indexPath];
         tableView.insertRows(at: indexPaths as [IndexPath], with: .automatic);
     
-        saveChecklistItems();
         
         dismiss(animated: true, completion: nil);
     }
@@ -198,7 +149,7 @@ extension ChecklistViewController: ItemDetailViewControllerDelegate {
     // 编辑
     func didDone(controller: ItemDetailViewController, finishEditItem item: ChecklistItem) {
 
-        if let index = items.index(where: {$0 === item}) {
+        if let index = list.items.index(where: {$0 === item}) {
 
             let indexPath = NSIndexPath(row: index, section: 0);
             
@@ -206,8 +157,7 @@ extension ChecklistViewController: ItemDetailViewControllerDelegate {
                 configureTextForCell(cell, withChecklistItem: item);
             }
         }
-        
-        saveChecklistItems();
+    
         
         dismiss(animated: true, completion: nil);
     }

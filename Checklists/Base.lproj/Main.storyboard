@@ -23,7 +23,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Checlists列表" id="Jg1-1C-iEl">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="YuF-md-q1h">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="YuF-md-q1h">
                             <connections>
                                 <segue destination="AhV-la-GTz" kind="presentation" identifier="AddChecklist" id="xL1-fU-nhd"/>
                             </connections>
