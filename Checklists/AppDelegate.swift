@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import UserNotifications
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +23,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let nav = window!.rootViewController as! UINavigationController;
         let controller = nav.viewControllers[0] as! AllListViewController;
         controller.dataModel = dataModel;
+        
+        /*
+        // 本地通知设置
+        let center = UNUserNotificationCenter.current();
+        center.requestAuthorization(options: [.alert, .sound], completionHandler: {
+            (grant, error) in
+            if error == nil {
+                print("request authorisation ok");
+            }
+        });
+        
+        
+        // 推送的内容
+        let notifyContent = UNMutableNotificationContent();
+        notifyContent.title = "新的提醒:";
+        notifyContent.body = "1231312312312312";
+        notifyContent.badge = 1;
+        
+        // 推送的标识器
+        let notifyIdentify = "checklist_notify)";
+        
+        // 触发
+        let interval = 10.211201020123;
+        print("间隔时间是: \(interval); \(TimeInterval(interval))");
+        
+        let notifyTrigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(interval), repeats: false);
+        
+        // 请求
+        let notifyRequest = UNNotificationRequest.init(identifier: notifyIdentify, content: notifyContent, trigger: notifyTrigger);
+        
+        //注册request
+        center.add(notifyRequest, withCompletionHandler: {
+            (error) in
+            if error == nil {
+                print("添加了一个提醒");
+            }
+        })
+        */
+    
         
         
         return true
@@ -50,6 +91,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dataModel.saveChecklist();
     }
 
-
+    
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+    }
+    
+    
 }
 

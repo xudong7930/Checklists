@@ -40,10 +40,22 @@ class DataModel {
         })
     }
     
+    // 获得下一个ItemID
+    class func nextChecklistItemID() -> Int {
+        
+        let myDefault = UserDefaults.standard;
+        let itemID = myDefault.integer(forKey: "ChecklistItemID");
+        myDefault.set(itemID+1, forKey: "ChecklistItemID");
+        myDefault.synchronize();
+        
+        return itemID;
+    }
     
     // 注册默认值
     func registerDefaults() {
-        let dic: [String: Any] = [saveKey: -1, "firstTime": true];
+        let dic: [String: Any] = [saveKey: -1,
+                                  "firstTime": true,
+                                    "ChecklistItemID": 0];
         
         
         
